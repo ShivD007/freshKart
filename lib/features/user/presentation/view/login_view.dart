@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fresh_kart/features/user/presentation/provider/login_providers.dart';
 import 'package:fresh_kart/utils/app_strings.dart';
 import 'package:fresh_kart/components/textfield.dart';
 import 'package:fresh_kart/utils/app_regex.dart';
+import 'package:riverpod/riverpod.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
 
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends ConsumerState<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -22,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = ref.watch(userNotifierProviders);
     return Scaffold(
       appBar: AppBar(title: Text(AppStrings.loginTitle)),
       body: Padding(
