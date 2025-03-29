@@ -1,11 +1,11 @@
 import 'package:fresh_kart/features/user/domain/entity/login_req_entity.dart';
 import 'package:fresh_kart/features/user/domain/entity/register_user_entity.dart';
 
-class RegisterUserModel {
+class RegisterUserReqModel {
   late String email;
   late String password;
 
-  RegisterUserModel({required this.email, required this.password});
+  RegisterUserReqModel({required this.email, required this.password});
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> data = {};
@@ -14,7 +14,7 @@ class RegisterUserModel {
     return data;
   }
 
-  factory RegisterUserModel.fromEntity(RegisterUserEntity entity) {
-    return RegisterUserModel(email: entity.email, password: entity.password);
+  factory RegisterUserReqModel.fromEntity(RegisterUserEntity entity) {
+    return RegisterUserReqModel(email: entity.email, password: entity.password);
   }
 }

@@ -39,7 +39,7 @@ final userNotifierProviders = StateNotifierProvider<UserNotifier, void>((ref) {
   return UserNotifier(refreshTokenUsecase, registerUserUseCase, loginUseCase);
 });
 
-class UserNotifier extends StateNotifier<void> {
+class UserNotifier extends StateNotifier {
   final RefreshTokenUsecase refreshTokenUsecase;
   final RegisterUserUseCase registerUserUseCase;
   final LoginUsecase loginUsecase;

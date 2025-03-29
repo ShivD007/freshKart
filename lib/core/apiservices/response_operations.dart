@@ -13,14 +13,13 @@ class ResponseOperation {
       switch (response.statusCode) {
         case 200:
         case 201:
-          log(response.body.toString());
           final responseJson = json.decode(response.body);
           return responseJson;
         case 406:
           throw BadRequestException(
               jsonDecode(response.body)["message"], json.decode(response.body));
         case 401:
-          // after 3 unsuccessful retry to refresh token, we do logout the user
+          // after 2 unsuccessful retry to refresh token, we do logout the user
           //TODO:// logout
           throw UnauthorisedException(AppStrings.sessionExpired);
         case 403:

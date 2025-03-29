@@ -22,4 +22,17 @@ class AppStrings {
   static const String internetDisConnected = "Internet connection issue";
   static const String sessionExpired = "Session expired, please login again";
   static const String somethingNotRight = "Something not right, please retry";
+
+  // registration
+  static const String title = 'User Registration';
+  static const String fullNameHint = 'Enter your full name';
+  static const String fullNameLabel = 'Full Name';
+  static const String fullNameError = 'Full name is required';
+  static const String emailError = 'Email is required';
+  static const String passwordError = 'Password is required';
+  static const String phoneHint = 'Enter your phone number';
+  static const String phoneLabel = 'Phone Number';
+  static const String phoneError = 'Phone number is required';
+  static const String phoneInvalidError = 'Enter a valid phone number';
+  static const String registerText = 'Register';
 }

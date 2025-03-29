@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fresh_kart/features/user/domain/entity/login_req_entity.dart';
 import 'package:fresh_kart/features/user/presentation/provider/login_providers.dart';
+import 'package:fresh_kart/routes/navigation.dart';
+import 'package:fresh_kart/routes/route_name.dart';
 import 'package:fresh_kart/utils/app_strings.dart';
 import 'package:fresh_kart/components/textfield.dart';
 import 'package:fresh_kart/utils/app_regex.dart';
@@ -18,13 +21,23 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  void _login() {
-    if (_formKey.currentState!.validate()) {}
+  Future<void> _login(UserNotifier userProvider) async {
+    if (_formKey.currentState!.validate()) {
+      final result = await userProvider.loginUsecase(LoginReqEntity(
+          email: _emailController.text, password: _passwordController.text));
+
+      result.fold((result) {
+        CustomNavigator.pushReplacement(
+          context,
+          Routes.dashboardScreen,
+        );
+      }, (failure) {});
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = ref.watch(userNotifierProviders);
+    final userProvider = ref.read(userNotifierProviders.notifier);
     return Scaffold(
       appBar: AppBar(title: Text(AppStrings.loginTitle)),
       body: Padding(
@@ -78,7 +91,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
               // Login Button
               ElevatedButton(
-                onPressed: _login,
+                onPressed: () {
+                  _login(userProvider);
+                },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 40, vertical: 12),
                 ),

@@ -10,6 +10,8 @@ class CustomTextField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final bool isEnabled;
   final Function(String)? onChanged; // New onChanged callback
+  final bool obscureText;
+  final Widget? suffixIcon;
 
   const CustomTextField({
     super.key,
@@ -20,7 +22,9 @@ class CustomTextField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.inputFormatters,
     this.isEnabled = true,
-    this.onChanged, // Initialize onChanged
+    this.onChanged,
+    this.obscureText = false,
+    this.suffixIcon,
   });
 
   @override
@@ -28,13 +32,14 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
+      obscureText: obscureText,
       inputFormatters: inputFormatters,
       enabled: isEnabled,
       decoration: InputDecoration(
-        hintText: hintText,
-        labelText: labelText,
-        border: const OutlineInputBorder(),
-      ),
+          hintText: hintText,
+          labelText: labelText,
+          border: const OutlineInputBorder(),
+          suffixIcon: suffixIcon),
       validator: validator,
       onChanged: onChanged,
     );

@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:fresh_kart/common_models/response_model.dart';
 import 'package:fresh_kart/core/apiservices/app_exceptions.dart';
 import 'package:fresh_kart/features/user/data/datasource/user_data_source.dart';
 import 'package:fresh_kart/features/user/data/model/login_req_model.dart';
@@ -17,19 +18,20 @@ class UserRepoImpl implements UserRepository {
   @override
   Future<Either<UserEntity, Failure>> login(LoginReqEntity entity) {
     LoginReqModel model = LoginReqModel.fromEntity(entity);
-    throw UnimplementedError();
+    return userDataSource.login(model);
   }
 
   @override
   Future<Either<UserEntity, Failure>> refreshToken(
       RefreshTokenReqEntity entity) {
     RefreshTokenReqModel model = RefreshTokenReqModel.fromEntity(entity);
-    throw UnimplementedError();
+    return userDataSource.refreshToken(model);
   }
 
   @override
-  Future<Either<UserEntity, Failure>> registerUser(RegisterUserEntity entity) {
-    RegisterUserModel model = RegisterUserModel.fromEntity(entity);
-    throw UnimplementedError();
+  Future<Either<ResponseModel, Failure>> registerUser(
+      RegisterUserEntity entity) {
+    RegisterUserReqModel model = RegisterUserReqModel.fromEntity(entity);
+    return userDataSource.register(model);
   }
 }

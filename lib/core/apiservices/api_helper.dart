@@ -58,6 +58,12 @@ class BaseApiCallHelper {
       return ResponseOperation.returnResponse(response);
     } on SocketException {
       throw FetchDataException(AppStrings.internetDisConnected);
+    } catch (e) {
+      if (e.runtimeType == Failure) {
+        rethrow;
+      } else {
+        throw CommonFailureException(e.toString());
+      }
     }
   }
 
@@ -74,6 +80,12 @@ class BaseApiCallHelper {
       return ResponseOperation.returnResponse(response);
     } on SocketException {
       throw FetchDataException(AppStrings.internetDisConnected);
+    } catch (e) {
+      if (e.runtimeType == Failure) {
+        rethrow;
+      } else {
+        throw CommonFailureException(e.toString());
+      }
     }
   }
 
@@ -88,6 +100,12 @@ class BaseApiCallHelper {
       return ResponseOperation.returnResponse(response);
     } on SocketException {
       throw FetchDataException(AppStrings.internetDisConnected);
+    } catch (e) {
+      if (e.runtimeType == Failure) {
+        rethrow;
+      } else {
+        throw CommonFailureException(e.toString());
+      }
     }
   }
 
@@ -104,6 +122,12 @@ class BaseApiCallHelper {
       return ResponseOperation.returnResponse(response);
     } on SocketException {
       throw FetchDataException(AppStrings.internetDisConnected);
+    } catch (e) {
+      if (e.runtimeType == Failure) {
+        rethrow;
+      } else {
+        throw CommonFailureException(e.toString());
+      }
     }
   }
 
@@ -117,6 +141,12 @@ class BaseApiCallHelper {
       return ResponseOperation.returnResponse(response);
     } on SocketException {
       throw FetchDataException(AppStrings.internetDisConnected);
+    } catch (e) {
+      if (e.runtimeType == Failure) {
+        rethrow;
+      } else {
+        throw CommonFailureException(e.toString());
+      }
     }
   }
 
@@ -131,6 +161,12 @@ class BaseApiCallHelper {
       return ResponseOperation.returnResponse(response);
     } on SocketException {
       throw FetchDataException(AppStrings.internetDisConnected);
+    } catch (e) {
+      if (e.runtimeType == Failure) {
+        rethrow;
+      } else {
+        throw CommonFailureException(e.toString());
+      }
     }
   }
 }
