@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fresh_kart/components/custom_alert_message.dart';
 import 'package:fresh_kart/features/user/domain/entity/login_req_entity.dart';
 import 'package:fresh_kart/features/user/presentation/provider/login_providers.dart';
 import 'package:fresh_kart/routes/navigation.dart';
@@ -31,7 +32,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           context,
           Routes.dashboardScreen,
         );
-      }, (failure) {});
+      }, (failure) {
+        AlertMessage.show(failure.toString());
+      });
     }
   }
 
