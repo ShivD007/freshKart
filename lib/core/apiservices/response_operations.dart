@@ -26,7 +26,8 @@ class ResponseOperation {
           throw UnauthorisedException(
               jsonDecode(response.body)["message"], json.decode(response.body));
         case 404:
-          throw NotFoundException(jsonDecode(response.body)["message"]);
+          throw NotFoundException(
+              jsonDecode(response.body)["message"], json.decode(response.body));
         case 408:
           throw LimitExceededException(jsonDecode(response.body)["message"]);
         case 500:

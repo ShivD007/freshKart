@@ -11,6 +11,7 @@ import 'package:fresh_kart/components/textfield.dart';
 import 'package:fresh_kart/utils/app_regex.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fresh_kart/utils/assets.dart';
+import 'package:fresh_kart/utils/helper.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -26,15 +27,22 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   Future<void> _login(UserNotifier userProvider) async {
     if (_formKey.currentState!.validate()) {
+      Helper.showLoaderDialog(context);
       final result = await userProvider.loginUsecase(LoginReqEntity(
           email: _emailController.text, password: _passwordController.text));
 
       result.fold((result) {
+        CustomNavigator.pop(context);
         CustomNavigator.pushReplacement(
           context,
           Routes.dashboardScreen,
         );
       }, (failure) {
+        CustomNavigator.pop(context);
+
+        if (failure.response?["data"]?["NON"] == 1) {
+          CustomNavigator.pushTo(context, Routes.registerationScreen);
+        }
         AlertMessage.show(failure.toString());
       });
     }
@@ -94,6 +102,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     hintText: AppStrings.passwordHint,
                     labelText: AppStrings.passwordLabel,
                     keyboardType: TextInputType.text,
+                    obscureText: true,
                     inputFormatters: [
                       FilteringTextInputFormatter.deny(AppRegex.noSpaces),
                     ],

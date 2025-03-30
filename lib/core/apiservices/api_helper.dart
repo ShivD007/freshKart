@@ -48,7 +48,7 @@ class BaseApiCallHelper {
   }
 
   static Future<dynamic> get(String url,
-      {Map<String, dynamic>? header,
+      {Map<String, String>? header,
       bool? logoutOnUnAuthorizedStatus = true}) async {
     Map<String, String> _tempHeader = {...getHeaders(), ...header ?? {}};
 
@@ -68,7 +68,7 @@ class BaseApiCallHelper {
   }
 
   static Future<dynamic> post(String url, Object? body,
-      {Map<String, dynamic>? header,
+      {Map<String, String>? header,
       bool? logoutOnUnAuthorizedStatus = true}) async {
     Map<String, String> _tempHeader = {...getHeaders(), ...header ?? {}};
 
@@ -81,7 +81,7 @@ class BaseApiCallHelper {
     } on SocketException {
       throw FetchDataException(AppStrings.internetDisConnected);
     } catch (e) {
-      if (e.runtimeType == Failure) {
+      if (e is Failure) {
         rethrow;
       } else {
         throw CommonFailureException(e.toString());
