@@ -36,3 +36,7 @@ class LimitExceededException extends Failure {
 class NotFoundException extends Failure {
   NotFoundException([String? message]) : super(message, "");
 }
+
+class CommonFailureException extends Failure {
+  CommonFailureException([String? message]) : super(message, "");
+}
