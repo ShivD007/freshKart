@@ -38,7 +38,8 @@ class CustomTextField extends StatelessWidget {
       decoration: InputDecoration(
           hintText: hintText,
           labelText: labelText,
-          border: const OutlineInputBorder(),
+          border: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(12))),
           suffixIcon: suffixIcon),
       validator: validator,
       onChanged: onChanged,
