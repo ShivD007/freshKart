@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fresh_kart/features/home/presentation/view/home_view.dart';
 import 'package:fresh_kart/features/user/presentation/view/login_view.dart';
 import 'package:fresh_kart/features/user/presentation/view/registration_view.dart';
 import 'package:fresh_kart/routes/route_name.dart';
@@ -16,6 +17,8 @@ class AppRoutes {
 
       case Routes.registerationScreen:
         return MaterialPageRoute(builder: (context) => RegistrationPage());
+      case Routes.dashboardScreen:
+        return MaterialPageRoute(builder: (context) => const HomeView());
 
       default:
         break;

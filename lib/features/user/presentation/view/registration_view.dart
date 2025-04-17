@@ -48,90 +48,95 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
-          child: Column(
-            children: [
-              CustomTextField(
-                controller: _fullNameController,
-                hintText: AppStrings.fullNameHint,
-                labelText: AppStrings.fullNameLabel,
-                keyboardType: TextInputType.text,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return AppStrings.fullNameError;
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 16),
-              CustomTextField(
-                controller: _emailController,
-                hintText: AppStrings.emailHint,
-                labelText: AppStrings.emailLabel,
-                keyboardType: TextInputType.emailAddress,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return AppStrings.emailError;
-                  }
-                  if (!RegExp(
-                          r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}")
-                      .hasMatch(value)) {
-                    return AppStrings.emailInvalidError;
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 16),
-              CustomTextField(
-                controller: _passwordController,
-                hintText: AppStrings.passwordHint,
-                labelText: AppStrings.passwordLabel,
-                keyboardType: TextInputType.visiblePassword,
-                obscureText: _isPasswordHidden,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return AppStrings.passwordError;
-                  }
-                  if (value.length < 8) {
-                    return AppStrings.passwordLengthError;
-                  }
-                  return null;
-                },
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    _isPasswordHidden ? Icons.visibility_off : Icons.visibility,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      _isPasswordHidden = !_isPasswordHidden;
-                    });
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                CustomTextField(
+                  controller: _fullNameController,
+                  hintText: AppStrings.fullNameHint,
+                  labelText: AppStrings.fullNameLabel,
+                  keyboardType: TextInputType.text,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return AppStrings.fullNameError;
+                    }
+                    return null;
                   },
                 ),
-              ),
-              SizedBox(height: 16),
-              CustomTextField(
-                controller: _phoneController,
-                hintText: AppStrings.phoneHint,
-                labelText: AppStrings.phoneLabel,
-                keyboardType: TextInputType.phone,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return AppStrings.phoneError;
-                  }
-                  if (value.length < 10) {
-                    return AppStrings.phoneInvalidError;
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: () {
-                  _submitForm(userProvider);
-                },
-                child: Text(AppStrings.registerText),
-              ),
-            ],
+                SizedBox(height: 16),
+                CustomTextField(
+                  controller: _emailController,
+                  hintText: AppStrings.emailHint,
+                  labelText: AppStrings.emailLabel,
+                  keyboardType: TextInputType.emailAddress,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return AppStrings.emailError;
+                    }
+                    if (!RegExp(
+                            r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}")
+                        .hasMatch(value)) {
+                      return AppStrings.emailInvalidError;
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 16),
+                CustomTextField(
+                  controller: _passwordController,
+                  hintText: AppStrings.passwordHint,
+                  labelText: AppStrings.passwordLabel,
+                  keyboardType: TextInputType.visiblePassword,
+                  obscureText: _isPasswordHidden,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return AppStrings.passwordError;
+                    }
+                    if (value.length < 6) {
+                      return AppStrings.passwordLengthError;
+                    }
+                    return null;
+                  },
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _isPasswordHidden
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _isPasswordHidden = !_isPasswordHidden;
+                      });
+                    },
+                  ),
+                ),
+                SizedBox(height: 16),
+                CustomTextField(
+                  controller: _phoneController,
+                  hintText: AppStrings.phoneHint,
+                  labelText: AppStrings.phoneLabel,
+                  keyboardType: TextInputType.phone,
+                  maxLength: 10,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return AppStrings.phoneError;
+                    }
+                    if (value.length < 10) {
+                      return AppStrings.phoneInvalidError;
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 24),
+                ElevatedButton(
+                  onPressed: () {
+                    _submitForm(userProvider);
+                  },
+                  child: Text(AppStrings.registerText),
+                ),
+              ],
+            ),
           ),
         ),
       ),

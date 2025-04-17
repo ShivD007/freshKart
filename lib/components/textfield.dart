@@ -12,20 +12,21 @@ class CustomTextField extends StatelessWidget {
   final Function(String)? onChanged; // New onChanged callback
   final bool obscureText;
   final Widget? suffixIcon;
+  final int? maxLength;
 
-  const CustomTextField({
-    super.key,
-    this.controller,
-    required this.hintText,
-    required this.labelText,
-    this.validator,
-    this.keyboardType = TextInputType.text,
-    this.inputFormatters,
-    this.isEnabled = true,
-    this.onChanged,
-    this.obscureText = false,
-    this.suffixIcon,
-  });
+  const CustomTextField(
+      {super.key,
+      this.controller,
+      required this.hintText,
+      required this.labelText,
+      this.validator,
+      this.keyboardType = TextInputType.text,
+      this.inputFormatters,
+      this.isEnabled = true,
+      this.onChanged,
+      this.obscureText = false,
+      this.suffixIcon,
+      this.maxLength});
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +36,12 @@ class CustomTextField extends StatelessWidget {
       obscureText: obscureText,
       inputFormatters: inputFormatters,
       enabled: isEnabled,
+      maxLength: maxLength,
       decoration: InputDecoration(
           hintText: hintText,
           labelText: labelText,
-          border: const OutlineInputBorder(),
+          border: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(12))),
           suffixIcon: suffixIcon),
       validator: validator,
       onChanged: onChanged,
