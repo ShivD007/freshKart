@@ -6,19 +6,30 @@ import 'package:fresh_kart/routes/route_name.dart';
 import 'package:fresh_kart/utils/global_context.dart';
 import 'package:fresh_kart/utils/shared_preference_keys.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SavePreferences.init();
-  final String? accessToken =
-      SavePreferences.getStringPreferences(SharedPreferenceKeys.accessTokenKey);
-  runApp(ProviderScope(child: MyApp(accessToken: accessToken)));
+  await SavePreferences.init();
+  runApp(ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
-  MyApp({super.key, required this.accessToken});
-  final String? accessToken;
+class MyApp extends StatefulWidget {
+  MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
+  String? accessToken;
+  @override
+  void initState() {
+    accessToken = SavePreferences.getStringPreferences(
+        SharedPreferenceKeys.accessTokenKey);
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
