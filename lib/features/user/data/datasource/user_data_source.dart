@@ -17,7 +17,12 @@ class UserDataSource {
           await BaseApiCallHelper.post(AppUrls.loginUrl, reqModel.toJson());
       return Left(UserModel.fromJson(result["data"]).toEntity());
     } catch (e) {
-      return Right(e as Failure);
+      if (e is Failure) {
+        return Right(e);
+      } else {
+        return Right(
+            TypeErrorException(e.toString())); // or however you handle it
+      }
     }
   }
 
@@ -28,7 +33,12 @@ class UserDataSource {
           await BaseApiCallHelper.post(AppUrls.refreshToken, reqModel.toJson());
       return Left(UserModel.fromJson(result["data"]).toEntity());
     } catch (e) {
-      return Right(e as Failure);
+      if (e is Failure) {
+        return Right(e);
+      } else {
+        return Right(
+            TypeErrorException(e.toString())); // or however you handle it
+      }
     }
   }
 
@@ -39,7 +49,12 @@ class UserDataSource {
           await BaseApiCallHelper.post(AppUrls.registerUrl, reqModel.toJson());
       return Left(ResponseModel.fromJson(result));
     } catch (e) {
-      return Right(e as Failure);
+      if (e is Failure) {
+        return Right(e);
+      } else {
+        return Right(
+            TypeErrorException(e.toString())); // or however you handle it
+      }
     }
   }
 }

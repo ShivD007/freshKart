@@ -40,3 +40,7 @@ class NotFoundException extends Failure {
 class CommonFailureException extends Failure {
   CommonFailureException([String? message]) : super(message);
 }
+
+class TypeErrorException extends Failure {
+  TypeErrorException([String? message]) : super(message);
+}

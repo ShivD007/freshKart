@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fresh_kart/components/custom_alert_message.dart';
+import 'package:fresh_kart/core/save_preference.dart';
 import 'package:fresh_kart/features/user/domain/entity/login_req_entity.dart';
 import 'package:fresh_kart/features/user/presentation/provider/login_providers.dart';
 import 'package:fresh_kart/routes/navigation.dart';
@@ -12,6 +13,7 @@ import 'package:fresh_kart/utils/app_regex.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fresh_kart/utils/assets.dart';
 import 'package:fresh_kart/utils/helper.dart';
+import 'package:fresh_kart/utils/shared_preference_keys.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -33,6 +35,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
       result.fold((result) {
         CustomNavigator.pop(context);
+        SavePreferences.saveStringPreferences(
+            SharedPreferenceKeys.refreshTokenKey, result.refreshToken);
+        SavePreferences.saveStringPreferences(
+            SharedPreferenceKeys.accessTokenKey, result.accessToken);
         CustomNavigator.pushReplacement(
           context,
           Routes.dashboardScreen,
