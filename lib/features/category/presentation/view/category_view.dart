@@ -29,8 +29,9 @@ class CategoryScreen extends ConsumerWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: GridView.builder(
                     gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent:
+                          200, // Each card will have max 200px width
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10,
                       childAspectRatio: 3 / 4,
