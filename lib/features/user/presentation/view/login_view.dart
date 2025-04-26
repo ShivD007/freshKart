@@ -30,7 +30,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       result.fold((result) {
         CustomNavigator.pushReplacement(
           context,
-          Routes.dashboardScreen,
+          Routes.home,
         );
       }, (failure) {
         AlertMessage.show(failure.toString());
