@@ -7,4 +7,5 @@ class AppUrls {
   static const String dashboardUrl = "/api/v1/dashboard";
 
   static const String addressUrl = "/api/v1/updateAddress";
+  static const String categories = "/api/v1/category/allCategories";
 }
