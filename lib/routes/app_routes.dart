@@ -17,6 +17,8 @@ class AppRoutes {
 
       case Routes.registerationScreen:
         return MaterialPageRoute(builder: (context) => RegistrationPage());
+      case Routes.dashboardScreen:
+        return MaterialPageRoute(builder: (context) => const HomeView());
 
       case Routes.home:
         return MaterialPageRoute(builder: (context) => HomeView());
