@@ -27,33 +27,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  Future<void> _login(UserNotifier userProvider) async {
-    if (_formKey.currentState!.validate()) {
-      Helper.showLoaderDialog(context);
-      final result = await userProvider.loginUsecase(LoginReqEntity(
-          email: _emailController.text, password: _passwordController.text));
-
-      result.fold((result) {
-        CustomNavigator.pop(context);
-        SavePreferences.saveStringPreferences(
-            SharedPreferenceKeys.refreshTokenKey, result.refreshToken);
-        SavePreferences.saveStringPreferences(
-            SharedPreferenceKeys.accessTokenKey, result.accessToken);
-        CustomNavigator.pushReplacement(
-          context,
-          Routes.home,
-        );
-      }, (failure) {
-        CustomNavigator.pop(context);
-
-        if (failure.response?["data"]?["NON"] == 1) {
-          CustomNavigator.pushTo(context, Routes.registerationScreen);
-        }
-        AlertMessage.show(failure.toString());
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final userProvider = ref.read(userNotifierProviders.notifier);
@@ -128,7 +101,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   Center(
                     child: ElevatedButton(
                       onPressed: () {
-                        _login(userProvider);
+                        if (_formKey.currentState!.validate()) {
+                          userProvider.login(
+                            context,
+                            LoginReqEntity(
+                                email: _emailController.text,
+                                password: _passwordController.text),
+                          );
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         padding:
