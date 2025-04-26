@@ -76,7 +76,7 @@ class UserNotifier extends Notifier {
 
           CustomNavigator.pushReplacement(
             context,
-            Routes.dashboardScreen,
+            Routes.home,
           );
         }
       },

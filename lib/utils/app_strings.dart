@@ -39,4 +39,5 @@ class AppStrings {
   static const String registerText = 'Register';
   static const String newAddress = "New Address";
   static const String submit = "Submit";
+  static const String categories = "Categories";
 }
