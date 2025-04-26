@@ -35,8 +35,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Flutter Demo',
       navigatorKey: GlobalContext.navigatorKey,
-      initialRoute:
-          accessToken != null ? Routes.dashboardScreen : Routes.loginScreen,
+      initialRoute: accessToken != null ? Routes.home : Routes.loginScreen,
       onGenerateRoute: (settings) => AppRoutes.getRoutes(settings),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
