@@ -19,7 +19,7 @@ class CategoryCard extends StatelessWidget {
               borderRadius:
                   const BorderRadius.vertical(top: Radius.circular(15)),
               child: Image.network(
-                category.imageUrl,
+                category.image,
                 fit: BoxFit.cover,
               ),
             ),
