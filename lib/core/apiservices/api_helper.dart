@@ -22,14 +22,14 @@ class BaseApiCallHelper {
   static const String _baseUrl = AppUrls.baseUrl;
 
   static Map<String, String> getHeaders() {
-    final String? _accessToken = SavePreferences.getStringPreferences(
+    final String? accessToken = SavePreferences.getStringPreferences(
         SharedPreferenceKeys.accessTokenKey);
-    Map<String, String> _header = {
+    Map<String, String> header = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ${_accessToken}'
+      'Authorization': accessToken.toString()
     };
-    if (_accessToken == null) _header.remove("Authorization");
-    return _header;
+    if (accessToken == null) header.remove("Authorization");
+    return header;
   }
 
   static https.Client http(logoutOnUnAuthorizedStatus) {
@@ -50,11 +50,11 @@ class BaseApiCallHelper {
   static Future<dynamic> get(String url,
       {Map<String, String>? header,
       bool? logoutOnUnAuthorizedStatus = true}) async {
-    Map<String, String> _tempHeader = {...getHeaders(), ...header ?? {}};
+    Map<String, String> tempHeader = {...getHeaders(), ...header ?? {}};
 
     try {
       final response = await http(logoutOnUnAuthorizedStatus)
-          .get(Uri.parse(_baseUrl + url), headers: _tempHeader);
+          .get(Uri.parse(_baseUrl + url), headers: tempHeader);
       return ResponseOperation.returnResponse(response);
     } on SocketException {
       throw FetchDataException(AppStrings.internetDisConnected);
@@ -70,13 +70,13 @@ class BaseApiCallHelper {
   static Future<dynamic> post(String url, Object? body,
       {Map<String, String>? header,
       bool? logoutOnUnAuthorizedStatus = true}) async {
-    Map<String, String> _tempHeader = {...getHeaders(), ...header ?? {}};
+    Map<String, String> tempHeader = {...getHeaders(), ...header ?? {}};
 
     try {
       final response = await http(logoutOnUnAuthorizedStatus).post(
           Uri.parse(_baseUrl + url),
           body: jsonEncode(body),
-          headers: _tempHeader);
+          headers: tempHeader);
       return ResponseOperation.returnResponse(response);
     } on SocketException {
       throw FetchDataException(AppStrings.internetDisConnected);
@@ -112,13 +112,13 @@ class BaseApiCallHelper {
   static Future<dynamic> delete(String url, Object? body,
       {Map<String, dynamic>? header,
       bool? logoutOnUnAuthorizedStatus = true}) async {
-    Map<String, String> _tempHeader = {...getHeaders(), ...header ?? {}};
+    Map<String, String> tempHeader = {...getHeaders(), ...header ?? {}};
 
     try {
       final response = await http(logoutOnUnAuthorizedStatus).delete(
           Uri.parse(_baseUrl + url),
           body: jsonEncode(body),
-          headers: _tempHeader);
+          headers: tempHeader);
       return ResponseOperation.returnResponse(response);
     } on SocketException {
       throw FetchDataException(AppStrings.internetDisConnected);

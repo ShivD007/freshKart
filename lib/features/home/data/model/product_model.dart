@@ -41,12 +41,12 @@ class ProductModel {
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
-      id: json['id'],
+      id: json['_id'],
       name: json['name'],
-      categoryId: json['categoryId'],
+      categoryId: json['category'],
       subProducts: List<SubProuctModel>.from(
-          json['subProducts'].map((x) => SubProuctModel.fromJson(x))),
-      frequentlyBought: SubProuctModel.fromJson(json['frequentlyBought']),
+          json['variants'].map((x) => SubProuctModel.fromJson(x))),
+      frequentlyBought: SubProuctModel.fromJson(json['frequentVariant']),
     );
   }
 }

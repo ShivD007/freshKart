@@ -1,13 +1,16 @@
 import 'dart:async';
 
+import 'package:fresh_kart/core/save_preference.dart';
+import 'package:fresh_kart/utils/shared_preference_keys.dart';
 import 'package:http_interceptor/http_interceptor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyInterceptor implements InterceptorContract {
   @override
   Future<BaseRequest> interceptRequest({required BaseRequest request}) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String accessToken = prefs.getString('accessToken') ?? "";
+    final String accessToken = SavePreferences.getStringPreferences(
+            SharedPreferenceKeys.accessTokenKey) ??
+        "";
     request.headers.addEntries([
       MapEntry(
         "Authorization",

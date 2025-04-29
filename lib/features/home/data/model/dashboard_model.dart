@@ -16,9 +16,9 @@ class DashboardModel {
 
   DashboardEntity toEntity() {
     return DashboardEntity(
-      categories: [],
-      products: [],
-      offers: [],
+      categories: categories.map((category) => category.toEntity()).toList(),
+      products: products.map((product) => product.toEntity()).toList(),
+      offers: offers.map((offer) => offer.toEntity()).toList(),
     );
   }
 

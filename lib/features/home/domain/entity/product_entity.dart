@@ -21,13 +21,13 @@ class SubProuctEntity {
   final double mrp;
   final double discount;
   final double priceAfterDiscount;
-  final List<String> imageUrl;
+  final List<String> images;
 
   SubProuctEntity({
     required this.description,
     required this.id,
     required this.name,
-    required this.imageUrl,
+    required this.images,
     required this.mrp,
     required this.discount,
     required this.priceAfterDiscount,

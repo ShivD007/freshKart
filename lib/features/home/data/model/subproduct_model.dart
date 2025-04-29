@@ -7,7 +7,7 @@ class SubProuctModel {
   final double mrp;
   final double discount;
   final double priceAfterDiscount;
-  final List<String> imageUrl;
+  final List<String> images;
 
   SubProuctModel({
     required this.id,
@@ -15,7 +15,7 @@ class SubProuctModel {
     required this.mrp,
     required this.discount,
     required this.priceAfterDiscount,
-    required this.imageUrl,
+    required this.images,
     required this.description,
   });
 
@@ -26,7 +26,7 @@ class SubProuctModel {
       mrp: mrp,
       discount: discount,
       priceAfterDiscount: priceAfterDiscount,
-      imageUrl: imageUrl,
+      images: images,
       description: description,
     );
   }
@@ -38,19 +38,19 @@ class SubProuctModel {
       mrp: entity.mrp,
       discount: entity.discount,
       priceAfterDiscount: entity.priceAfterDiscount,
-      imageUrl: entity.imageUrl,
+      images: entity.images,
       description: entity.description,
     );
   }
 
   factory SubProuctModel.fromJson(Map<String, dynamic> json) {
     return SubProuctModel(
-      id: json['id'],
+      id: json['_id'],
       name: json['name'],
       mrp: json['mrp'].toDouble(),
       discount: json['discount'].toDouble(),
       priceAfterDiscount: json['priceAfterDiscount'].toDouble(),
-      imageUrl: List<String>.from(json['imageUrl']),
+      images: List<String>.from(json['images']),
       description: json['description'],
     );
   }
@@ -62,7 +62,7 @@ class SubProuctModel {
       'mrp': mrp,
       'discount': discount,
       'priceAfterDiscount': priceAfterDiscount,
-      'imageUrl': imageUrl,
+      'images': images,
       'description': description,
     };
   }

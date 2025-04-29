@@ -3,19 +3,15 @@ import 'package:fresh_kart/features/home/domain/entity/category_entity.dart';
 class CategoryModel {
   final String id;
   final String name;
-  final String imageUrl;
+  final String image;
 
-  CategoryModel({
-    required this.id,
-    required this.name,
-    required this.imageUrl,
-  });
+  CategoryModel({required this.id, required this.name, required this.image});
 
   CategoryEntity toEntity() {
     return CategoryEntity(
       id: id,
       name: name,
-      imageUrl: imageUrl,
+      image: image,
     );
   }
 
@@ -23,15 +19,15 @@ class CategoryModel {
     return CategoryModel(
       id: entity.id,
       name: entity.name,
-      imageUrl: entity.imageUrl,
+      image: entity.image,
     );
   }
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) {
     return CategoryModel(
-      id: json['id'],
+      id: json['_id'],
       name: json['name'],
-      imageUrl: json['imageUrl'],
+      image: json['image'],
     );
   }
 
@@ -39,7 +35,7 @@ class CategoryModel {
     return {
       'id': id,
       'name': name,
-      'imageUrl': imageUrl,
+      'image': image,
     };
   }
 }
