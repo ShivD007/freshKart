@@ -62,21 +62,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.wallet,
-                color: Colors.black,
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
                 Icons.shopping_bag,
-                color: Colors.black,
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.favorite,
                 color: Colors.black,
               ),
               label: '',

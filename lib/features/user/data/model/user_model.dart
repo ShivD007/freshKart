@@ -1,6 +1,7 @@
 import 'package:fresh_kart/features/user/domain/entity/user_entity.dart';
 
 class UserModel {
+  final String id;
   final String fullName;
   final String email;
   final String phoneNo;
@@ -15,6 +16,7 @@ class UserModel {
     required this.address,
     required this.accessToken,
     required this.refreshToken,
+    required this.id,
   });
 
   UserEntity toEntity() {
@@ -22,6 +24,7 @@ class UserModel {
       fullName: fullName,
       email: email,
       phoneNo: phoneNo,
+      id: id,
       address: address,
       accessToken: accessToken,
       refreshToken: refreshToken,
@@ -36,6 +39,7 @@ class UserModel {
       address: json["address"],
       accessToken: json["accessToken"],
       refreshToken: json["refreshToken"],
+      id: json["id"],
     );
   }
 }

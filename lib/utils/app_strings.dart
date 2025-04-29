@@ -1,4 +1,5 @@
 class AppStrings {
+  AppStrings._();
   // Login Page Strings
   static const String loginTitle = "Login Page";
   static const String emailHint = "Enter your email";
@@ -11,6 +12,7 @@ class AppStrings {
   static const String emailEmptyError = "Please enter your email";
   static const String emailInvalidError = "Enter a valid email";
   static const String passwordEmptyError = "Please enter your password";
+  static const String addressEmptyError = "Please enter your address";
   static const String passwordLengthError =
       "Password must be at least 6 characters";
 
@@ -35,4 +37,7 @@ class AppStrings {
   static const String phoneError = 'Phone number is required';
   static const String phoneInvalidError = 'Enter a valid phone number';
   static const String registerText = 'Register';
+  static const String newAddress = "New Address";
+  static const String submit = "Submit";
+  static const String categories = "Categories";
 }
