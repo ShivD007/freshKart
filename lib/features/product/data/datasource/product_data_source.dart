@@ -9,8 +9,8 @@ class ProductDataSource {
   Future<Either<List<ProductEntity>, Failure>> getProducts(
       String? categoryId) async {
     try {
-      final result = await BaseApiCallHelper.get(
-          AppUrls.products + "?categoryId=$categoryId");
+      final result = await BaseApiCallHelper.get(AppUrls.products +
+          (categoryId != null ? "?categoryId=$categoryId" : ""));
       final List<dynamic> data = result["data"]["products"];
 
       final products = data

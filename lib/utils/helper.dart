@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fresh_kart/core/save_preference.dart';
+import 'package:fresh_kart/routes/navigation.dart';
+import 'package:fresh_kart/routes/route_name.dart';
+import 'package:fresh_kart/utils/app_constants.dart';
+import 'package:fresh_kart/utils/shared_preference_keys.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Helper {
   static void showLoaderDialog(BuildContext context) {
@@ -50,5 +57,21 @@ class Helper {
     );
   }
 
+  static void openDialer(String phoneNumber) async {
+    final uri = Uri.parse('tel:$phoneNumber');
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      // Handle error
+    }
+  }
 
+  static void logout(BuildContext context) async {
+    SavePreferences.clearAKey(SharedPreferenceKeys.refreshTokenKey);
+    SavePreferences.clearAKey(SharedPreferenceKeys.accessTokenKey);
+    SavePreferences.clearAKey(SharedPreferenceKeys.userInfo);
+
+    CustomNavigator.popUntil(context, "//");
+    CustomNavigator.pushTo(context, Routes.loginScreen);
+  }
 }

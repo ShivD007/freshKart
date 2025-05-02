@@ -9,7 +9,9 @@ import 'package:fresh_kart/utils/shared_preference_keys.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SavePreferences.init();
-  runApp(ProviderScope(child: MyApp()));
+  runApp(ProviderScope(
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatefulWidget {
@@ -35,7 +37,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Flutter Demo',
       navigatorKey: GlobalContext.navigatorKey,
-      initialRoute: accessToken != null ? Routes.home : Routes.loginScreen,
+      initialRoute: accessToken != null ? Routes.dashboard : Routes.loginScreen,
       onGenerateRoute: (settings) => AppRoutes.getRoutes(settings),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

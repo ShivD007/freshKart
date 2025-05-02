@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fresh_kart/components/custom_alert_message.dart';
 import 'package:fresh_kart/core/save_preference.dart';
-import 'package:fresh_kart/features/settings/presentation/components/update_address_component.dart';
 import 'package:fresh_kart/features/user/data/datasource/user_data_source.dart';
 import 'package:fresh_kart/features/user/data/repository/user_repo_impl.dart';
 import 'package:fresh_kart/features/user/domain/entity/login_req_entity.dart';
@@ -30,6 +29,7 @@ final loginUserProvider = Provider<LoginUsecase>((ref) {
   final repo = ref.read(userRepoProvider);
   return LoginUsecase(userRepository: repo);
 });
+
 final refreshTokenProvider = Provider<RefreshTokenUsecase>((ref) {
   final repo = ref.read(userRepoProvider);
   return RefreshTokenUsecase(userRepository: repo);
@@ -40,8 +40,7 @@ final registerUserProvider = Provider<RegisterUserUseCase>((ref) {
   return RegisterUserUseCase(userRepository: repo);
 });
 
-final userNotifierProviders =
-    NotifierProvider<UserNotifier, void>(UserNotifier.new);
+final userProvider = NotifierProvider<UserNotifier, void>(UserNotifier.new);
 
 class UserNotifier extends Notifier {
   late RegisterUserUseCase registerUserUseCase;
@@ -63,16 +62,16 @@ class UserNotifier extends Notifier {
       (result) {
         CustomNavigator.pop(context);
         SavePreferences.saveStringPreferences(
-            SharedPreferenceKeys.refreshTokenKey, result.refreshToken);
+            SharedPreferenceKeys.refreshTokenKey, result.refreshToken!);
         SavePreferences.saveStringPreferences(
-            SharedPreferenceKeys.accessTokenKey, result.accessToken);
+            SharedPreferenceKeys.accessTokenKey, result.accessToken!);
 
         SavePreferences.saveStringPreferences(
             SharedPreferenceKeys.userInfo, jsonEncode(result.toJson()));
 
         CustomNavigator.pushReplacement(
           context,
-          Routes.home,
+          Routes.dashboard,
         );
       },
       (failure) {

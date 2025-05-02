@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fresh_kart/features/home/domain/entity/product_entity.dart';
+import 'package:fresh_kart/features/home/presentation/view/components/product.dart';
 import 'package:fresh_kart/features/home/presentation/view/home_view.dart';
 import 'package:fresh_kart/features/product/presentation/provider/product_provider.dart';
 
