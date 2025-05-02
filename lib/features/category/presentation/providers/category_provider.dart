@@ -25,18 +25,20 @@ final useCaseProvider = Provider<CategoryUseCase>((ref) {
 });
 
 final categoryProvider =
-    NotifierProvider<CategoryNotifier, CategoryState>(CategoryNotifier.new);
+    NotifierProvider.autoDispose<CategoryNotifier, CategoryState>(
+        CategoryNotifier.new);
 
-class CategoryNotifier extends Notifier<CategoryState> {
+class CategoryNotifier extends AutoDisposeNotifier<CategoryState> {
   @override
   build() {
+    ref.onDispose(() {});
+
     return CategoryState();
   }
 
-  Future<void> getCategories(String newAddress,
-      {required VoidCallback onComplete}) async {
-    final result = await ref.read(useCaseProvider)();
+  Future<void> getCategories() async {
     state = state.copyWith(isLoading: true);
+    final result = await ref.read(useCaseProvider)();
 
     result.fold(
       (category) {
@@ -50,7 +52,7 @@ class CategoryNotifier extends Notifier<CategoryState> {
 }
 
 class CategoryState {
-  final bool? isLoading;
+  final bool isLoading;
   final List<CategoryEntity>? categories;
   final String? error;
 
