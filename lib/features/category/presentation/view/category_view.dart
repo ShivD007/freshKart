@@ -3,18 +3,30 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fresh_kart/features/category/presentation/components/category_card.dart';
 import 'package:fresh_kart/features/category/presentation/providers/category_provider.dart';
 
-class CategoryScreen extends ConsumerWidget {
+class CategoryScreen extends ConsumerStatefulWidget {
   const CategoryScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final categoriesState = ref.watch(categoryProvider);
+  ConsumerState<CategoryScreen> createState() => _CategoryScreenState();
+}
 
+class _CategoryScreenState extends ConsumerState<CategoryScreen> {
+  @override
+  void initState() {
+    Future.microtask(() {
+      ref.read(categoryProvider.notifier).getCategories();
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final categoriesState = ref.watch(categoryProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Categories'),
       ),
-      body: categoriesState.isLoading!
+      body: categoriesState.isLoading
           ? const Center(
               child: CircularProgressIndicator(),
             )
