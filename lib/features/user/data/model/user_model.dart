@@ -1,3 +1,4 @@
+import 'package:fresh_kart/features/settings/data/models/address_model.dart';
 import 'package:fresh_kart/features/user/domain/entity/user_entity.dart';
 
 class UserModel {
@@ -5,9 +6,9 @@ class UserModel {
   final String fullName;
   final String email;
   final String phoneNo;
-  final String? address;
-  final String accessToken;
-  final String refreshToken;
+  final AddressModel? address;
+  final String? accessToken;
+  final String? refreshToken;
 
   UserModel({
     required this.fullName,
@@ -36,10 +37,12 @@ class UserModel {
       fullName: json["fullName"],
       email: json["email"],
       phoneNo: json["phoneNo"].toString(),
-      address: json["address"],
+      address: json["address"] == null
+          ? null
+          : AddressModel.fromJson(json["address"]),
       accessToken: json["accessToken"],
       refreshToken: json["refreshToken"],
-      id: json["id"],
+      id: json["id"] ?? json["_id"],
     );
   }
 }

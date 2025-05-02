@@ -6,4 +6,5 @@ class Routes {
   static const home = "/homeScreen";
   static const categories = "/categories";
   static const products = "/products";
+  static const dashboard = "/dashboard";
 }

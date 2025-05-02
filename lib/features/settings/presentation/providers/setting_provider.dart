@@ -2,15 +2,19 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fresh_kart/components/custom_alert_message.dart';
 import 'package:fresh_kart/core/save_preference.dart';
 import 'package:fresh_kart/features/settings/data/datasource/update_address_data_source.dart';
+import 'package:fresh_kart/features/settings/data/models/address_model.dart';
 import 'package:fresh_kart/features/settings/data/repository/address_repo_impl.dart';
 import 'package:fresh_kart/features/settings/domain/entity/update_address_req_entity.dart';
 import 'package:fresh_kart/features/settings/domain/repository/address_repo.dart';
 import 'package:fresh_kart/features/settings/domain/usecase/address_use_case.dart';
 import 'package:fresh_kart/features/user/domain/entity/user_entity.dart';
+import 'package:fresh_kart/routes/navigation.dart';
+import 'package:fresh_kart/utils/helper.dart';
 import 'package:fresh_kart/utils/shared_preference_keys.dart';
 
 final dataSourceProvider = Provider<UpdateAddressDataSource>((ref) {
@@ -41,17 +45,25 @@ class UserNotifier extends Notifier<UserEntity> {
     return user;
   }
 
-  Future<void> updateAddress(String newAddress,{ required VoidCallback onComplete}) async {
-    state.address = newAddress;
-
-    final result = await ref.read(useCaseProvider)(
-        UpdateAddressReqEntity(address: newAddress, userId: state.id));
-
+  Future<void> updateAddress(
+      String newAddress, String pincode, String alternativeMobileNo,
+      {required VoidCallback onComplete, required BuildContext context}) async {
+    Helper.showLoaderDialog(context);
+    final result = await ref.read(useCaseProvider)(UpdateAddressReqEntity(
+      address: newAddress,
+      userId: state.id,
+      alternateMobileNo: alternativeMobileNo,
+      pincode: pincode,
+    ));
+    CustomNavigator.pop(context);
     result.fold((user) {
-      SavePreferences.saveStringPreferences(
-          SharedPreferenceKeys.refreshTokenKey, user.refreshToken);
-      SavePreferences.saveStringPreferences(
-          SharedPreferenceKeys.accessTokenKey, user.accessToken);
+      state = state.copyWith(
+        address: AddressModel(
+          address: newAddress,
+          pincode: pincode,
+          alternateMobileNo: alternativeMobileNo,
+        ),
+      );
       SavePreferences.saveStringPreferences(
           SharedPreferenceKeys.userInfo, jsonEncode(user.toJson()));
 

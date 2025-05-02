@@ -40,4 +40,23 @@ class AppStrings {
   static const String newAddress = "New Address";
   static const String submit = "Submit";
   static const String categories = "Categories";
+
+  static const String profileHeaderName = 'Full Name';
+  static const String profileHeaderEmail = 'Email';
+
+  static const String contactInfoSection = 'Contact Info';
+  static const String addressSection = 'Address';
+
+  // Labels
+  static const String phoneNumberLabel = 'Phone Number';
+  static const String addressLabel = 'Delivery Address';
+
+  // Placeholder Text
+  static const String addressNotProvided = 'Not provided';
+
+  // Buttons
+  static const String logoutButton = 'Logout';
+
+  // Miscellaneous
+  static const String appBarTitle = 'Account Settings';
 }

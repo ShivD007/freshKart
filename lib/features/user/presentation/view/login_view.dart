@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fresh_kart/components/custom_alert_message.dart';
-import 'package:fresh_kart/core/save_preference.dart';
 import 'package:fresh_kart/features/user/domain/entity/login_req_entity.dart';
 import 'package:fresh_kart/features/user/presentation/provider/login_providers.dart';
-import 'package:fresh_kart/routes/navigation.dart';
-import 'package:fresh_kart/routes/route_name.dart';
 import 'package:fresh_kart/utils/app_strings.dart';
 import 'package:fresh_kart/components/textfield.dart';
 import 'package:fresh_kart/utils/app_regex.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fresh_kart/utils/assets.dart';
-import 'package:fresh_kart/utils/helper.dart';
-import 'package:fresh_kart/utils/shared_preference_keys.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -29,7 +23,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = ref.read(userNotifierProviders.notifier);
+    final userInfoProvider = ref.read(userProvider.notifier);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -102,7 +96,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     child: ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          userProvider.login(
+                          userInfoProvider.login(
                             context,
                             LoginReqEntity(
                                 email: _emailController.text,

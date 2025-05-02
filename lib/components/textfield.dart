@@ -14,19 +14,20 @@ class CustomTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final int? maxLength;
 
-  const CustomTextField(
-      {super.key,
-      this.controller,
-      required this.hintText,
-      required this.labelText,
-      this.validator,
-      this.keyboardType = TextInputType.text,
-      this.inputFormatters,
-      this.isEnabled = true,
-      this.onChanged,
-      this.obscureText = false,
-      this.suffixIcon,
-      this.maxLength});
+  const CustomTextField({
+    super.key,
+    this.controller,
+    required this.hintText,
+    required this.labelText,
+    this.validator,
+    this.keyboardType = TextInputType.text,
+    this.inputFormatters,
+    this.isEnabled = true,
+    this.onChanged,
+    this.obscureText = false,
+    this.suffixIcon,
+    this.maxLength,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +39,13 @@ class CustomTextField extends StatelessWidget {
       enabled: isEnabled,
       maxLength: maxLength,
       decoration: InputDecoration(
-          hintText: hintText,
-          labelText: labelText,
-          border: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(12))),
-          suffixIcon: suffixIcon),
+        counterText: "",
+        hintText: hintText,
+        labelText: labelText,
+        border: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(12))),
+        suffixIcon: suffixIcon,
+      ),
       validator: validator,
       onChanged: onChanged,
     );

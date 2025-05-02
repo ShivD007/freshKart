@@ -1,10 +1,12 @@
+import 'package:fresh_kart/features/settings/data/models/address_model.dart';
+
 class UserEntity {
   final String fullName;
   final String email;
   final String phoneNo;
-  String? address;
-  final String accessToken;
-  final String refreshToken;
+  final AddressModel? address;
+  final String? accessToken;
+  final String? refreshToken;
   final String id;
 
   UserEntity({
@@ -22,7 +24,7 @@ class UserEntity {
       fullName: map['fullName'] ?? '',
       email: map['email'] ?? '',
       phoneNo: map['phoneNo'] ?? '',
-      address: map['address'],
+      address: AddressModel.fromJson(map['address']),
       accessToken: map['accessToken'] ?? '',
       refreshToken: map['refreshToken'] ?? '',
       id: map['id'] ?? '',
@@ -34,10 +36,30 @@ class UserEntity {
       'fullName': fullName,
       'email': email,
       'phoneNo': phoneNo,
-      'address': address,
+      'address': address?.toJson(),
       'accessToken': accessToken,
       'refreshToken': refreshToken,
       "id": id,
     };
+  }
+
+  UserEntity copyWith({
+    String? fullName,
+    String? email,
+    String? phoneNo,
+    AddressModel? address,
+    String? accessToken,
+    String? refreshToken,
+    String? id,
+  }) {
+    return UserEntity(
+      fullName: fullName ?? this.fullName,
+      email: email ?? this.email,
+      phoneNo: phoneNo ?? this.phoneNo,
+      address: address ?? this.address,
+      accessToken: accessToken ?? this.accessToken,
+      refreshToken: refreshToken ?? this.refreshToken,
+      id: id ?? this.id,
+    );
   }
 }

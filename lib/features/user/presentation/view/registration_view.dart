@@ -40,7 +40,7 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
 
   @override
   Widget build(BuildContext context) {
-    final UserNotifier userProvider = ref.read(userNotifierProviders.notifier);
+    final UserNotifier userInfoProvider = ref.read(userProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(title: Text(AppStrings.registerText)),
@@ -131,7 +131,7 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
                 SizedBox(height: 24),
                 ElevatedButton(
                   onPressed: () {
-                    _submitForm(userProvider);
+                    _submitForm(userInfoProvider);
                   },
                   child: Text(AppStrings.registerText),
                 ),
