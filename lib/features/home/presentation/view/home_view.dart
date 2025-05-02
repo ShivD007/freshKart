@@ -16,6 +16,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
   @override
   void initState() {
     super.initState();
+
     ref.read(dashboardNotifierProvider.notifier).loadDashboard();
   }
 
