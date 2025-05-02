@@ -16,8 +16,9 @@ class _HomeViewState extends ConsumerState<HomeView> {
   @override
   void initState() {
     super.initState();
-
-    ref.read(dashboardNotifierProvider.notifier).loadDashboard();
+    Future.microtask(() {
+      ref.read(dashboardNotifierProvider.notifier).loadDashboard();
+    });
   }
 
   @override
@@ -91,33 +92,39 @@ class _HomeViewState extends ConsumerState<HomeView> {
                         child: Padding(
                           padding: const EdgeInsets.all(16),
                           child: Column(
+                              mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                ListView(
-                                  physics: const BouncingScrollPhysics(),
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.horizontal,
-                                  children: dashboardState.data!.offers
-                                      .map((offer) => _buildPromoCard(
-                                          offer.name, offer.description))
-                                      .toList(),
+                                SizedBox(
+                                  height: 200,
+                                  child: ListView(
+                                    physics: const BouncingScrollPhysics(),
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    children: dashboardState.data!.offers
+                                        .map((offer) => _buildPromoCard(
+                                            offer.name, offer.description))
+                                        .toList(),
+                                  ),
                                 ),
                                 const SizedBox(height: 16),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Text(
-                                      'Novelties of the week',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    TextButton(
-                                      onPressed: () {},
-                                      child: const Text('See all'),
-                                    ),
-                                  ],
+                                Flexible(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text(
+                                        'Novelties of the week',
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {},
+                                        child: const Text('See all'),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
@@ -125,7 +132,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
                                     children: dashboardState.data!.products
                                         .map((product) => _buildProductCard(
                                             product.name,
-                                            "500g",
+                                            product.subProducts[0].toString(),
                                             4.5.toString(),
                                             product.subProducts[0].mrp
                                                 .toString()))
@@ -133,15 +140,18 @@ class _HomeViewState extends ConsumerState<HomeView> {
                                   ),
                                 ),
                                 const SizedBox(height: 16),
-                                Wrap(
-                                  crossAxisAlignment: WrapCrossAlignment.start,
-                                  alignment: WrapAlignment.start,
-                                  spacing: 8,
-                                  runSpacing: 8,
-                                  children: dashboardState.data!.categories
-                                      .map((category) => _buildCategoryCard(
-                                          category.name, context))
-                                      .toList(),
+                                Flexible(
+                                  child: Wrap(
+                                    crossAxisAlignment:
+                                        WrapCrossAlignment.start,
+                                    alignment: WrapAlignment.start,
+                                    spacing: 8,
+                                    runSpacing: 8,
+                                    children: dashboardState.data!.categories
+                                        .map((category) => _buildCategoryCard(
+                                            category.name, context))
+                                        .toList(),
+                                  ),
                                 ),
                               ]),
                         ),

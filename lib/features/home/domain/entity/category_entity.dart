@@ -1,11 +1,11 @@
 class CategoryEntity {
   String id;
   String name;
-  String imageUrl;
+  String image;
 
   CategoryEntity({
     required this.id,
     required this.name,
-    required this.imageUrl,
+    required this.image,
   });
 }
