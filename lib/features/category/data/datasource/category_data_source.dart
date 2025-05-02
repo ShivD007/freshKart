@@ -9,8 +9,11 @@ class CategoryDataSource {
   Future<Either<List<CategoryEntity>, Failure>> getCategories() async {
     try {
       final result = await BaseApiCallHelper.get(AppUrls.categories);
+      final List<Map<String, dynamic>> data =
+          List<Map<String, dynamic>>.from(result["data"]);
+
       return Left(
-          result["data"].map((e) => CategoryModel.fromJson(e).toEntity()));
+          data.map((e) => CategoryModel.fromJson(e).toEntity()).toList());
     } catch (e) {
       if (e is Failure) {
         return Right(e);

@@ -33,7 +33,7 @@ class CategoryModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      '_id': id,
       'name': name,
       'image': image,
     };

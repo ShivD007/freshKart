@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:fresh_kart/core/apiservices/api_helper.dart';
 import 'package:fresh_kart/core/apiservices/app_exceptions.dart';
@@ -9,9 +11,10 @@ class DashboardDatasource {
   Future<Either<DashboardEntity, Failure>> fetchDashboardData() async {
     try {
       final result = await BaseApiCallHelper.get(AppUrls.dashboardUrl);
+
       return Left(DashboardModel.fromJson(result["data"]).toEntity());
     } catch (e) {
-      return Right(e as Failure);
+      return Right(TypeErrorException(e.toString()));
     }
   }
 }

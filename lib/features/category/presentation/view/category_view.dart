@@ -27,22 +27,17 @@ class CategoryScreen extends ConsumerWidget {
                 )
               : Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent:
-                          200, // Each card will have max 200px width
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
-                      childAspectRatio: 3 / 4,
-                    ),
-                    itemCount: (categoriesState.categories ?? []).length,
-                    itemBuilder: (context, index) {
-                      final category = categoriesState.categories![index];
-                      return CategoryCard(category: category);
-                    },
-                  ),
-                ),
+                  child: Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.start,
+                    alignment: WrapAlignment.start,
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: categoriesState.categories
+                            ?.map(
+                                (category) => CategoryCard(category: category))
+                            .toList() ??
+                        [],
+                  )),
     );
   }
 }

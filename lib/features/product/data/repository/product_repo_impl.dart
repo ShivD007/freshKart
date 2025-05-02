@@ -14,7 +14,8 @@ class ProductRepoImpl implements ProductRepository {
   }
 
   @override
-  Future<Either<List<ProductEntity>, Failure>> fetchProducts() {
-    return dataSource.getProducts();
+  Future<Either<List<ProductEntity>, Failure>> fetchProducts(
+      String? categoryId) async {
+    return dataSource.getProducts(categoryId);
   }
 }

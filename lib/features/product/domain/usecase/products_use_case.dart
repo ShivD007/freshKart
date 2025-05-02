@@ -8,7 +8,7 @@ class ProductsUseCase {
 
   ProductsUseCase({required this.productRepo});
 
-  Future<Either<List<ProductEntity>, Failure>> call() async {
-    return await productRepo.fetchProducts();
+  Future<Either<List<ProductEntity>, Failure>> call(String? categoryId) async {
+    return await productRepo.fetchProducts(categoryId);
   }
 }
