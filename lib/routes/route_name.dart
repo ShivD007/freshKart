@@ -5,4 +5,5 @@ class Routes {
   static const registerationScreen = "/registrationScreen";
   static const home = "/homeScreen";
   static const categories = "/categories";
+  static const products = "/products";
 }

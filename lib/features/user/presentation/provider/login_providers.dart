@@ -63,22 +63,22 @@ class UserNotifier extends Notifier {
       (result) {
         CustomNavigator.pop(context);
 
-        if (result.address == null) {
-          Helper.showBottomSheet(context,
-              isDismissible: false, child: const UpdateAddressComponent());
-        } else {
-          SavePreferences.saveStringPreferences(
-              SharedPreferenceKeys.refreshTokenKey, result.refreshToken);
-          SavePreferences.saveStringPreferences(
-              SharedPreferenceKeys.accessTokenKey, result.accessToken);
-          SavePreferences.saveStringPreferences(
-              SharedPreferenceKeys.userInfo, jsonEncode(result.toJson()));
+        // if (result.address == null) {
+        //   Helper.showBottomSheet(context,
+        //       isDismissible: false, child: const UpdateAddressComponent());
+        // } else {
+        SavePreferences.saveStringPreferences(
+            SharedPreferenceKeys.refreshTokenKey, result.refreshToken);
+        SavePreferences.saveStringPreferences(
+            SharedPreferenceKeys.accessTokenKey, result.accessToken);
+        SavePreferences.saveStringPreferences(
+            SharedPreferenceKeys.userInfo, jsonEncode(result.toJson()));
 
-          CustomNavigator.pushReplacement(
-            context,
-            Routes.home,
-          );
-        }
+        CustomNavigator.pushReplacement(
+          context,
+          Routes.home,
+        );
+        // }
       },
       (failure) {
         CustomNavigator.pop(context);
