@@ -61,14 +61,7 @@ class UserNotifier extends Notifier {
     result.fold(
       (result) {
         CustomNavigator.pop(context);
-        SavePreferences.saveStringPreferences(
-            SharedPreferenceKeys.refreshTokenKey, result.refreshToken!);
-        SavePreferences.saveStringPreferences(
-            SharedPreferenceKeys.accessTokenKey, result.accessToken!);
-
-        SavePreferences.saveStringPreferences(
-            SharedPreferenceKeys.userInfo, jsonEncode(result.toJson()));
-
+        Helper.saveLoginDetails(result);
         CustomNavigator.pushReplacement(
           context,
           Routes.dashboard,

@@ -24,7 +24,8 @@ class UserEntity {
       fullName: map['fullName'] ?? '',
       email: map['email'] ?? '',
       phoneNo: map['phoneNo'] ?? '',
-      address: AddressModel.fromJson(map['address']),
+      address:
+          map['address'] == null ? null : AddressModel.fromJson(map['address']),
       accessToken: map['accessToken'] ?? '',
       refreshToken: map['refreshToken'] ?? '',
       id: map['id'] ?? '',
