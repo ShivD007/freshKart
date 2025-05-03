@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fresh_kart/core/save_preference.dart';
+import 'package:fresh_kart/features/user/domain/entity/user_entity.dart';
 import 'package:fresh_kart/routes/navigation.dart';
 import 'package:fresh_kart/routes/route_name.dart';
 import 'package:fresh_kart/utils/app_constants.dart';
@@ -73,5 +76,15 @@ class Helper {
 
     CustomNavigator.popUntil(context, "//");
     CustomNavigator.pushTo(context, Routes.loginScreen);
+  }
+
+  static saveLoginDetails(UserEntity userEntity) {
+    SavePreferences.saveStringPreferences(
+        SharedPreferenceKeys.refreshTokenKey, userEntity.refreshToken!);
+    SavePreferences.saveStringPreferences(
+        SharedPreferenceKeys.accessTokenKey, userEntity.accessToken!);
+
+    SavePreferences.saveStringPreferences(
+        SharedPreferenceKeys.userInfo, jsonEncode(userEntity.toJson()));
   }
 }

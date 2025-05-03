@@ -15,7 +15,11 @@ class CurrentViewProvider extends StateNotifier<int> {
   final sp.UserNotifier settingProvider;
   final DashboardNotifier dashboardNotifier;
   CurrentViewProvider(super.state,
-      {required this.settingProvider, required this.dashboardNotifier});
+      {required this.settingProvider, required this.dashboardNotifier}) {
+    Future.microtask(() {
+      onChange(0);
+    });
+  }
 
   void onChange(int index) {
     state = index;

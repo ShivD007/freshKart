@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:fresh_kart/core/save_preference.dart';
 import 'package:fresh_kart/utils/shared_preference_keys.dart';
 import 'package:http_interceptor/http_interceptor.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class MyInterceptor implements InterceptorContract {
   @override

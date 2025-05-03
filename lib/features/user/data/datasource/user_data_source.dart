@@ -28,18 +28,18 @@ class UserDataSource {
 
   Future<Either<UserEntity, Failure>> refreshToken(
       RefreshTokenReqModel reqModel) async {
-    try {
-      final result =
-          await BaseApiCallHelper.post(AppUrls.refreshToken, reqModel.toJson());
-      return Left(UserModel.fromJson(result["data"]).toEntity());
-    } catch (e) {
-      if (e is Failure) {
-        return Right(e);
-      } else {
-        return Right(
-            TypeErrorException(e.toString())); // or however you handle it
-      }
-    }
+    // try {
+    final result =
+        await BaseApiCallHelper.post(AppUrls.refreshToken, reqModel.toJson());
+    return Left(UserModel.fromJson(result["data"]).toEntity());
+    // } catch (e) {
+    //   if (e is Failure) {
+    //     return Right(e);
+    //   } else {
+    //     return Right(
+    //         TypeErrorException(e.toString())); // or however you handle it
+    //   }
+    // }
   }
 
   Future<Either<ResponseModel, Failure>> register(
