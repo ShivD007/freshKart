@@ -19,8 +19,8 @@ class SubProuctModel {
     required this.description,
   });
 
-  SubProuctEntity toEntity() {
-    return SubProuctEntity(
+  SubProductEntity toEntity() {
+    return SubProductEntity(
       id: id,
       name: name,
       mrp: mrp,
@@ -31,7 +31,7 @@ class SubProuctModel {
     );
   }
 
-  factory SubProuctModel.fromEntity(SubProuctEntity entity) {
+  factory SubProuctModel.fromEntity(SubProductEntity entity) {
     return SubProuctModel(
       id: entity.id,
       name: entity.name,

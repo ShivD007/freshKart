@@ -6,7 +6,6 @@ import 'package:fresh_kart/features/user/data/model/login_req_model.dart';
 import 'package:fresh_kart/features/user/data/model/refresh_token_req_model.dart';
 import 'package:fresh_kart/features/user/data/model/register_user_model.dart';
 import 'package:fresh_kart/features/user/data/model/user_model.dart';
-import 'package:fresh_kart/features/user/domain/entity/refresh_token_req_entity.dart';
 import 'package:fresh_kart/features/user/domain/entity/user_entity.dart';
 import 'package:fresh_kart/utils/app_urls.dart';
 

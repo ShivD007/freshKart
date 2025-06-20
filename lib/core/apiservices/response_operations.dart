@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:fresh_kart/core/apiservices/app_exceptions.dart';
 import 'package:fresh_kart/utils/app_strings.dart';
 import 'package:http/http.dart';

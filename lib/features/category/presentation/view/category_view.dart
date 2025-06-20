@@ -22,6 +22,7 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
     final categoriesState = ref.watch(categoryProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Categories'),
