@@ -45,19 +45,19 @@ class _HomeViewState extends ConsumerState<HomeView> {
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(
-                                  height: 200,
-                                  child: ListView(
-                                    physics: const BouncingScrollPhysics(),
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.horizontal,
-                                    children: dashboardState.data!.offers
-                                        .map((offer) => _buildPromoCard(
-                                            offer.name, offer.description))
-                                        .toList(),
-                                  ),
-                                ),
-                                const SizedBox(height: 16),
+                                // SizedBox(
+                                //   height: 200,
+                                //   child: ListView(
+                                //     physics: const BouncingScrollPhysics(),
+                                //     shrinkWrap: true,
+                                //     scrollDirection: Axis.horizontal,
+                                //     children: dashboardState.data!.offers
+                                //         .map((offer) => _buildPromoCard(
+                                //             offer.name, offer.description))
+                                //         .toList(),
+                                //   ),
+                                // ),
+                                // const SizedBox(height: 16),
                                 Flexible(
                                   child: Row(
                                     mainAxisAlignment:

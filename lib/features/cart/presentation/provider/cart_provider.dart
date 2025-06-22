@@ -76,10 +76,16 @@ class CartNotifier extends Notifier<CartState> {
   }
 
   Future<void> deleteCart(String cartId) async {
-    final result = await ref.read(deleteCartUseCase)(
-        cartId); // Replace 'itemId' with the actual item ID to delete
+    final result = await ref.read(deleteCartUseCase)(cartId);
     result.fold(
       (cart) {
+        final updatedProducts = state.cartEntity?.products
+            .where((product) => product.id != cartId)
+            .toList();
+        state = state.copyWith(
+          cartEntity: state.cartEntity?.copyWith(updatedProducts),
+        );
+
         AlertMessage.show(cart.message);
       },
       (failure) {
@@ -112,13 +118,28 @@ class CartNotifier extends Notifier<CartState> {
     );
   }
 
-  Future<void> updateCart() async {
+  Future<void> updateCart(
+      {required String productId,
+      required int quantity,
+      required String variantId,
+      required String cartId}) async {
+    int index =
+        state.cartEntity?.products.indexWhere((ele) => ele.id == cartId) ?? -1;
+
+    if (index == -1) return;
+    final product = state.cartEntity?.products[index];
+    product?.quantity = product.quantity + quantity;
+
+    state.cartEntity?.products[index] = product!;
+    state = state.copyWith(cartEntity: state.cartEntity);
+
     UpdateCartItemReqEntity updateCartItemReqEntity = UpdateCartItemReqEntity(
-      productId: '',
-      quantity: 1,
-      variantId: '',
-      cartId: '',
+      productId: productId,
+      quantity: product!.quantity.toInt(),
+      variantId: variantId,
+      cartId: cartId,
     );
+
     final result = await ref.read(updateCartUseCase)(updateCartItemReqEntity);
     result.fold(
       (cart) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fresh_kart/features/cart/domain/entity/cart_entity.dart';
+import 'package:fresh_kart/features/cart/presentation/provider/cart_provider.dart';
 
 class CartProductList extends ConsumerWidget {
   final CartEntity cart;
@@ -15,7 +16,6 @@ class CartProductList extends ConsumerWidget {
         final product = cart.products[index];
 
         return Card(
-          margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           child: ListTile(
             leading: Image.network(
               product.variant.images.first,
@@ -33,12 +33,17 @@ class CartProductList extends ConsumerWidget {
                   children: [
                     IconButton(
                       icon: const Icon(Icons.remove),
-                      onPressed: () => _updateQuantity(ref, product, -1),
+                      onPressed: () {
+                        if (product.quantity == 1) return;
+                        _updateQuantity(ref, product, -1);
+                      },
                     ),
                     Text('${product.quantity}'),
                     IconButton(
                       icon: const Icon(Icons.add),
-                      onPressed: () => _updateQuantity(ref, product, 1),
+                      onPressed: () {
+                        _updateQuantity(ref, product, 1);
+                      },
                     ),
                   ],
                 ),
@@ -46,7 +51,9 @@ class CartProductList extends ConsumerWidget {
             ),
             trailing: IconButton(
               icon: const Icon(Icons.delete, color: Colors.red),
-              onPressed: () => _deleteProduct(ref, product),
+              onPressed: () {
+                _deleteProduct(ref, product);
+              },
             ),
           ),
         );
@@ -54,7 +61,15 @@ class CartProductList extends ConsumerWidget {
     );
   }
 
-  void _updateQuantity(WidgetRef ref, CartProduct product, int change) {}
+  void _updateQuantity(WidgetRef ref, CartProduct cart, int change) {
+    ref.read(cartProvider.notifier).updateCart(
+        productId: cart.productId,
+        quantity: change,
+        variantId: cart.variant.id,
+        cartId: cart.id);
+  }
 
-  void _deleteProduct(WidgetRef ref, CartProduct product) {}
+  void _deleteProduct(WidgetRef ref, CartProduct cart) {
+    ref.read(cartProvider.notifier).deleteCart(cart.id);
+  }
 }

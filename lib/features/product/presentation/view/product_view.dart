@@ -39,7 +39,7 @@ class _ProductViewState extends ConsumerState<ProductView> {
                       style: const TextStyle(color: Colors.red),
                     ),
                   )
-                : productState.productEntity == null
+                : productState.productEntity?.isEmpty ?? true
                     ? const Center(child: Text('No data available'))
                     : Padding(
                         padding: const EdgeInsets.all(8.0),

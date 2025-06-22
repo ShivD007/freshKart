@@ -37,23 +37,13 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
     final viewProviderWatcher = ref.watch(currentViewProvider);
 
     return Scaffold(
-        appBar: CustomAppBar(
+        appBar: AppBar(
           title:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(
-              'Express delivery',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodySmall!
-                  .copyWith(color: Colors.white),
-            ),
-            Text(
-              user.address?.address ?? "",
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyLarge!
-                  .copyWith(color: Colors.white),
-            )
+            Text('Express delivery',
+                style: Theme.of(context).textTheme.bodySmall!),
+            Text(user.address?.address ?? "",
+                style: Theme.of(context).textTheme.titleLarge!)
           ]),
         ),
         bottomNavigationBar: BottomNavigationBar(

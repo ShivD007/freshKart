@@ -1,5 +1,7 @@
+import 'package:fresh_kart/features/home/domain/entity/product_entity.dart';
+
 class CartEntity {
-  final List<CartProduct> products;
+  List<CartProduct> products;
   final num mrp;
   final num discount;
   final num priceAfterDiscount;
@@ -20,6 +22,14 @@ class CartEntity {
       priceAfterDiscount: json['priceAfterDiscount'],
     );
   }
+
+  CartEntity copyWith(List<CartProduct>? product) {
+    return CartEntity(
+        discount: discount,
+        mrp: mrp,
+        priceAfterDiscount: priceAfterDiscount,
+        products: product ?? products);
+  }
 }
 
 class CartProduct {
@@ -27,7 +37,7 @@ class CartProduct {
   final String productId;
   final Variant variant;
   final String association;
-  final num quantity;
+  num quantity;
   final num mrp;
   final num discount;
   final num priceAfterDiscount;

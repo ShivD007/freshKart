@@ -6,10 +6,15 @@ import 'package:fresh_kart/routes/route_name.dart';
 import 'package:fresh_kart/utils/global_context.dart';
 import 'package:fresh_kart/utils/shared_preference_keys.dart';
 
+final providerContainer = ProviderContainer();
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Create a ProviderContainer manually
+
   await SavePreferences.init();
-  runApp(ProviderScope(
+  runApp(UncontrolledProviderScope(
+    container: providerContainer,
     child: MyApp(),
   ));
 }

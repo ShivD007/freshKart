@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fresh_kart/features/cart/presentation/components/cart_list.dart';
-import 'package:fresh_kart/features/cart/presentation/components/cart_summary.dart';
 import 'package:fresh_kart/features/cart/presentation/provider/cart_provider.dart';
 
 class CartScreen extends ConsumerWidget {
@@ -23,17 +22,9 @@ class CartScreen extends ConsumerWidget {
                     style: const TextStyle(color: Colors.red),
                   ),
                 )
-              : cart.cartEntity == null
+              : cart.cartEntity?.products.isEmpty ?? true
                   ? const Center(child: Text('No items in the cart'))
-                  : Column(
-                      children: [
-                        Expanded(
-                            child: CartProductList(cart: cart.cartEntity!)),
-                        const Divider(),
-                        CartSummary(cart: cart.cartEntity!),
-                        const Divider(),
-                      ],
-                    ),
+                  : CartProductList(cart: cart.cartEntity!),
     );
   }
 }
