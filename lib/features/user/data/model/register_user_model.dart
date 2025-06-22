@@ -1,4 +1,3 @@
-import 'package:fresh_kart/features/user/domain/entity/login_req_entity.dart';
 import 'package:fresh_kart/features/user/domain/entity/register_user_entity.dart';
 
 class RegisterUserReqModel {

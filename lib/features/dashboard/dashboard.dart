@@ -1,9 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fresh_kart/components/custom_app_bar.dart';
+import 'package:fresh_kart/core/save_preference.dart';
+import 'package:fresh_kart/features/cart/presentation/view/cart_screen.dart';
 import 'package:fresh_kart/features/dashboard/dashboard_provider.dart';
 import 'package:fresh_kart/features/home/presentation/view/home_view.dart';
 import 'package:fresh_kart/features/settings/presentation/view/settings_view.dart';
+import 'package:fresh_kart/features/user/domain/entity/user_entity.dart';
+import 'package:fresh_kart/utils/shared_preference_keys.dart';
 
 class DashboardView extends ConsumerStatefulWidget {
   const DashboardView({super.key});
@@ -14,29 +20,30 @@ class DashboardView extends ConsumerStatefulWidget {
 
 class _DashboardViewState extends ConsumerState<DashboardView> {
   PageController controller = PageController();
+  late UserEntity user;
+
+  @override
+  void initState() {
+    super.initState();
+    final String userJson =
+        SavePreferences.getStringPreferences(SharedPreferenceKeys.userInfo) ??
+            "{}";
+    user = UserEntity.fromMap(jsonDecode(userJson));
+  }
+
   @override
   Widget build(BuildContext context) {
     final viewProvider = ref.read(currentViewProvider.notifier);
     final viewProviderWatcher = ref.watch(currentViewProvider);
 
     return Scaffold(
-        appBar: CustomAppBar(
+        appBar: AppBar(
           title:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(
-              'Express delivery',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodySmall!
-                  .copyWith(color: Colors.white),
-            ),
-            Text(
-              'Deepolie Street, 42',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyLarge!
-                  .copyWith(color: Colors.white),
-            )
+            Text('Express delivery',
+                style: Theme.of(context).textTheme.bodySmall!),
+            Text(user.address?.address ?? "",
+                style: Theme.of(context).textTheme.titleLarge!)
           ]),
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -73,7 +80,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
           physics: const NeverScrollableScrollPhysics(),
           children: const [
             HomeView(),
-            SizedBox(),
+            CartScreen(),
             SettingsView(),
           ],
         ));

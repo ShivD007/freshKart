@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fresh_kart/features/category/presentation/components/category_card.dart';
 import 'package:fresh_kart/features/home/domain/entity/dashboard_entity.dart';
 import 'package:fresh_kart/features/home/presentation/provider/home_provider.dart';
-import 'package:fresh_kart/features/home/presentation/view/components/product.dart';
+import 'package:fresh_kart/features/product/presentation/components/product.dart';
 import 'package:fresh_kart/routes/navigation.dart';
 import 'package:fresh_kart/routes/route_name.dart';
 
@@ -45,19 +45,19 @@ class _HomeViewState extends ConsumerState<HomeView> {
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(
-                                  height: 200,
-                                  child: ListView(
-                                    physics: const BouncingScrollPhysics(),
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.horizontal,
-                                    children: dashboardState.data!.offers
-                                        .map((offer) => _buildPromoCard(
-                                            offer.name, offer.description))
-                                        .toList(),
-                                  ),
-                                ),
-                                const SizedBox(height: 16),
+                                // SizedBox(
+                                //   height: 200,
+                                //   child: ListView(
+                                //     physics: const BouncingScrollPhysics(),
+                                //     shrinkWrap: true,
+                                //     scrollDirection: Axis.horizontal,
+                                //     children: dashboardState.data!.offers
+                                //         .map((offer) => _buildPromoCard(
+                                //             offer.name, offer.description))
+                                //         .toList(),
+                                //   ),
+                                // ),
+                                // const SizedBox(height: 16),
                                 Flexible(
                                   child: Row(
                                     mainAxisAlignment:
@@ -85,6 +85,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
                                     children: dashboardState.data!.products
                                         .map((product) => ProductWidget(
                                               direction: Axis.vertical,
+                                              cProduct: product,
                                               name: product.name,
                                               subProuctEntity:
                                                   product.subProducts,

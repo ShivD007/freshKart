@@ -135,7 +135,6 @@ class _InfoTile extends StatelessWidget {
     required this.icon,
     required this.label,
     required this.value,
-    super.key,
   });
 
   @override
@@ -172,7 +171,6 @@ class _ClickableTile extends StatelessWidget {
     required this.label,
     required this.value,
     required this.onTap,
-    super.key,
   });
 
   @override
@@ -187,7 +185,7 @@ class _ClickableTile extends StatelessWidget {
 class _SectionTitle extends StatelessWidget {
   final String title;
 
-  const _SectionTitle(this.title, {super.key});
+  const _SectionTitle(this.title);
 
   @override
   Widget build(BuildContext context) {

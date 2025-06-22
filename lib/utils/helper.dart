@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fresh_kart/core/save_preference.dart';
+import 'package:fresh_kart/features/home/presentation/provider/home_provider.dart';
 import 'package:fresh_kart/features/user/domain/entity/user_entity.dart';
+import 'package:fresh_kart/main.dart';
 import 'package:fresh_kart/routes/navigation.dart';
 import 'package:fresh_kart/routes/route_name.dart';
-import 'package:fresh_kart/utils/app_constants.dart';
 import 'package:fresh_kart/utils/shared_preference_keys.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -70,10 +70,10 @@ class Helper {
   }
 
   static void logout(BuildContext context) async {
+    providerContainer.invalidate(dashboardDatasourceProvider);
     SavePreferences.clearAKey(SharedPreferenceKeys.refreshTokenKey);
     SavePreferences.clearAKey(SharedPreferenceKeys.accessTokenKey);
     SavePreferences.clearAKey(SharedPreferenceKeys.userInfo);
-
     CustomNavigator.popUntil(context, "//");
     CustomNavigator.pushTo(context, Routes.loginScreen);
   }

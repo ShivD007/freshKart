@@ -1,12 +1,11 @@
-import 'package:flutter/foundation.dart';
 import 'package:fresh_kart/features/home/domain/entity/category_entity.dart';
 
 class ProductEntity {
   final String id;
   final String name;
   final CategoryEntity category;
-  final List<SubProuctEntity> subProducts;
-  final SubProuctEntity frequentlyBought;
+  final List<SubProductEntity> subProducts;
+  final SubProductEntity frequentlyBought;
 
   ProductEntity({
     required this.category,
@@ -17,7 +16,7 @@ class ProductEntity {
   });
 }
 
-class SubProuctEntity {
+class SubProductEntity {
   final String id;
   final String description;
   final String name;
@@ -26,7 +25,7 @@ class SubProuctEntity {
   final double priceAfterDiscount;
   final List<String> images;
 
-  SubProuctEntity({
+  SubProductEntity({
     required this.description,
     required this.id,
     required this.name,

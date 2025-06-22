@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fresh_kart/features/cart/presentation/provider/cart_provider.dart';
 import 'package:fresh_kart/features/home/domain/entity/product_entity.dart';
 import 'package:fresh_kart/utils/helper.dart';
 
-class ProductWidget extends StatelessWidget {
+class ProductWidget extends ConsumerWidget {
   const ProductWidget(
       {super.key,
       required this.name,
       required this.weight,
+      required this.cProduct,
       required this.subProuctEntity,
       required this.direction});
   final String name;
   final String weight;
-  final List<SubProuctEntity> subProuctEntity;
+  final ProductEntity cProduct;
+  final List<SubProductEntity> subProuctEntity;
 
   final Axis direction;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    final cartProviderRef = ref.read(cartProvider.notifier);
     return Container(
         width: direction == Axis.horizontal ? double.maxFinite : 150,
         decoration: BoxDecoration(
@@ -65,6 +70,14 @@ class ProductWidget extends StatelessWidget {
                                     mainAxisSize: MainAxisSize.min,
                                     children: subProuctEntity
                                         .map((product) => ListTile(
+                                              onTap: () {
+                                                cartProviderRef.addToCart(
+                                                  productId: cProduct.id,
+                                                  quantity: 1,
+                                                  varientId: product.id,
+                                                  context: context,
+                                                );
+                                              },
                                               leading: product.images.isEmpty
                                                   ? null
                                                   : Image.network(

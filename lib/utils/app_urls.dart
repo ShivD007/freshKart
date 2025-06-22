@@ -9,4 +9,5 @@ class AppUrls {
   static const String addressUrl = "/api/v1/address/updateAddress";
   static const String categories = "/api/v1/category/allCategories";
   static const String products = "/api/v1/product";
+  static const String cartQueries = "/api/v1/cart";
 }

@@ -11,7 +11,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.title,
     this.actions,
     this.leading,
-    this.backgroundColor = Colors.blue,
+    this.backgroundColor = Colors.white,
   }) : super(key: key);
 
   @override

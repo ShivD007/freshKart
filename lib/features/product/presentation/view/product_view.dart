@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fresh_kart/features/home/presentation/view/components/product.dart';
-import 'package:fresh_kart/features/home/presentation/view/home_view.dart';
+import 'package:fresh_kart/features/product/presentation/components/product.dart';
 import 'package:fresh_kart/features/product/presentation/provider/product_provider.dart';
 
 class ProductView extends ConsumerStatefulWidget {
@@ -40,7 +39,7 @@ class _ProductViewState extends ConsumerState<ProductView> {
                       style: const TextStyle(color: Colors.red),
                     ),
                   )
-                : productState.productEntity == null
+                : productState.productEntity?.isEmpty ?? true
                     ? const Center(child: Text('No data available'))
                     : Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -53,6 +52,7 @@ class _ProductViewState extends ConsumerState<ProductView> {
                                   ?.map((product) => ProductWidget(
                                       direction: Axis.horizontal,
                                       name: product.name,
+                                      cProduct: product,
                                       weight: product.subProducts.first.name,
                                       subProuctEntity: product.subProducts))
                                   .toList() ??
