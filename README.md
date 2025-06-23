@@ -4,13 +4,43 @@ A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is a learning project open to the community to learn 
+1. Clean architecture
+2. Riverpod StateManagement
+3. and Express code with MongoDB database( will add link to that as a seperate repo)
 
-A few resources to get you started if this is your first Flutter project:
+#
+## What included in this Repo
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. We are using our own Express project for api creation so this project is a full fledged project that will help you to step into backend world along with frontend with flutter app development.
+2. Clean architecture
+3. Riverpod as StateManagement
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+#
+##  How to setup
+
+1. In our flutter app move to app_url.dart file change the baseUrl with ipAddress of your computer in which you are running Express project.
+
+2. In express make .env file and paste your MongoDB database link with 
+
+     ----
+
+3. in terminal of express project type 
+      "npm start"
+
+Note: You will need Node and npm installed in your PC to run express project.
+
+## Demo
+
+
+
+
+## Documentation
+
+[Riverpod](https://riverpod.dev/docs/introduction/getting_started)
+
+[Flutter](https://flutter.dev/)
+
+[Our Own Express Project](https://github.com/NishadAvnish/freekart_express)
+
+[Express Prject setup and .env file with mongoDB]("https://www.youtube.com/watch?v=TYmtJu5OSJM&t=251s)
