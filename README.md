@@ -32,9 +32,14 @@ Note: You will need Node and npm installed in your PC to run express project.
 
 ## Demo
 
-![screenshot] (https://github.com/NishadAvnish/freshKart/blob/main/1.jpg)
-![my-image-alt-tag ] (https://github.com/NishadAvnish/freshKart/blob/main/2.jpg)
-![screen] (https://github.com/NishadAvnish/freshKart/blob/main/3.jpg)
+![screenshot](https://github.com/NishadAvnish/freshKart/blob/main/1.jpg)
+
+
+
+![my-image-alt-tag ](https://github.com/NishadAvnish/freshKart/blob/main/2.jpg)
+
+
+![screen](https://github.com/NishadAvnish/freshKart/blob/main/3.jpg)
 
 
 ## Documentation
